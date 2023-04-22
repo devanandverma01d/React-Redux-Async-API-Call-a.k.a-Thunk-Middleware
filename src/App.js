@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+//1. import area
+import {useDispatch, useSelector } from 'react-redux';
 import './App.css';
-
+import { getUserData } from './actionCreator';
+//2. function definition area
 function App() {
+  //2.1 Hooks area
+
+  // let storeObjectdata =  useSelector((store)=> {return store})
+  let dispatch = useDispatch()
+  let storeObjectdata =  useSelector(store=> store)
+
+  //2.2 Function def
+  //2.3 Return statement
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {console.log(storeObjectdata)}
+      <button onClick={()=>{dispatch(getUserData())}}>Call My API</button>
+      <ul> 
+        {
+          storeObjectdata && storeObjectdata.map((cv,idx,arr)=>{
+            return <li key={idx}>{cv.first_name}</li>
+          })
+        }
+      </ul>
+      
+
+    </>
   );
 }
 
